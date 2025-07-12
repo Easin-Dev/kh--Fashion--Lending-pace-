@@ -6,7 +6,6 @@ import Features from "./components/Features/page";
 import Testimonials from "./components/Testimonials/page";
 import ContactUs from "./components/ContactUs/page";
 import Footer from "./components/Footer/page";
-import Products from "./components/Products/page";
 
 export default function App() {
   return (
@@ -26,10 +25,6 @@ export default function App() {
         <section id="featured">
           <Features />
         </section>
-
-        {/* <section id="collections">
-          <Products />
-        </section> */}
 
         <section id="reviews">
           <Testimonials />
