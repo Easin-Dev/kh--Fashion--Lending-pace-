@@ -1,22 +1,45 @@
-import React from 'react'
-import Navbar from './components/NavBar/page'
-import Hero from './components/Hero/page'
-import Features from './components/Features/page'
-import Testimonials from './components/Testimonials/page'
-import AboutUs from './components/AboutUs/page'
-import ContactUs from './components/ContactUs/page'
-import Footer from './components/Footer/page'
+"use client";
+import React from "react";
+import Navbar from "./components/NavBar/page";
+import Hero from "./components/Hero/page";
+import Features from "./components/Features/page";
+import Testimonials from "./components/Testimonials/page";
+import ContactUs from "./components/ContactUs/page";
+import Footer from "./components/Footer/page";
+import Products from "./components/Products/page";
 
-export default function Home() {
+export default function App() {
   return (
-    <div id='Home'>
+    <>
+      <style jsx global>{`
+        html {
+          scroll-behavior: smooth;
+        }
+      `}</style>
+
       <Navbar />
-      <Hero />
-      <Features />
-      <Testimonials />
-      <AboutUs />
-      <ContactUs />
+      <main>
+        <section id="home">
+          <Hero />
+        </section>
+
+        <section id="featured">
+          <Features />
+        </section>
+
+        {/* <section id="collections">
+          <Products />
+        </section> */}
+
+        <section id="reviews">
+          <Testimonials />
+        </section>
+
+        <section id="contact">
+          <ContactUs />
+        </section>
+      </main>
       <Footer />
-    </div>
-  )
+    </>
+  );
 }
