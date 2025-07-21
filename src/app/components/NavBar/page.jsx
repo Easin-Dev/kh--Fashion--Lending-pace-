@@ -40,12 +40,12 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex lg:space-x-8">
+          <nav className="xl:ms-[20%] hidden lg:flex lg:space-x-16">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-gray-600 hover:text-black text-sm font-semibold transition-colors duration-200 flex items-center cursor-pointer"
+                className="text-gray-600 hover:text-black text-[15px] uppercase font-semibold transition-colors duration-200 flex items-center cursor-pointer"
               >
                 {link.name}
               </a>
