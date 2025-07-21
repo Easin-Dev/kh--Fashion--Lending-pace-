@@ -12,11 +12,15 @@ function ProductCard({ product }) {
   return (
     <div className="w-full p-3">
       <div className="border border-gray-200 rounded-lg overflow-hidden group transition-shadow duration-300 hover:shadow-xl bg-white flex flex-col h-full">
-        <div className="relative w-full h-64 bg-gray-100">
+        {/* ছবির কন্টেইনারটির উচ্চতা এবং স্টাইল পরিবর্তন করা হয়েছে */}
+        <div
+          className="relative w-full bg-gray-100"
+          style={{ height: "420px" }}
+        >
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain p-4" // object-contain ব্যবহার করা হয়েছে এবং প্যাডিং যোগ করা হয়েছে
             onError={(e) => {
               e.target.onerror = null;
               e.target.src =

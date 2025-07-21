@@ -14,6 +14,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "scontent.fjsr12-1.fna.fbcdn.net",
       },
+      {
+        protocol: "https",
+        hostname: "i.postimg.cc",
+      },
     ],
   },
 };

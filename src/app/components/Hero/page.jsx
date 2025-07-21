@@ -4,45 +4,57 @@ import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
-
-// স্লাইডারের ডেটা
-const slides = [
-  {
-    leftImage:
-      "https://scontent.fjsr12-1.fna.fbcdn.net/v/t39.30808-6/472915726_122191542884128317_3871593462846501589_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=MmB8t6VXFOEQ7kNvwG5BlIS&_nc_oc=AdkkJkOvwFpGcLglZJjdoSCeG4bs6I73GWpX-ZVvBMzElHB9h0JiMeiOvfrDZp0FxAA&_nc_zt=23&_nc_ht=scontent.fjsr12-1.fna&_nc_gid=dhydmCmcKTbvmRy2hbGNuw&oh=00_AfS9aN0-BGvxabuG7DxmKpb5pI-s8DGQbo9hV-6O1Ruwvw&oe=6877B8B0",
-    rightImage:
-      "https://scontent.fjsr12-1.fna.fbcdn.net/v/t39.30808-6/473318922_122191542866128317_2926669780370830446_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=cWvZHk7P3fMQ7kNvwF_S6U0&_nc_oc=AdmU-UC-gw8MhNH1p8ITbFzJBjIVKTOdHQ4BgTDrhV94szv0Ng0awRv3cyYiU_TlRwM&_nc_zt=23&_nc_ht=scontent.fjsr12-1.fna&_nc_gid=7UeK3r3SyTKGI7l5SYdEHQ&oh=00_AfQIOboIlcLQpQIOgQd6AzPuFSOS__-A0knzOMcJIy2NyA&oe=6877DEDF",
-    title: "New Arrivals",
-    subtitle: "FASHION COLLECTION",
-  },
-  {
-    leftImage:
-      "https://scontent.fjsr12-1.fna.fbcdn.net/v/t39.30808-6/472906927_122191542668128317_4933919390336722227_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_ohc=rkA6zhNwE_8Q7kNvwE4wcmX&_nc_oc=AdnNHxH1XFzGCUCCqH2wqYG7BxYer1JZC9ioFvgO0PTqf9oW8lEcculu1wo38s7v3qk&_nc_zt=23&_nc_ht=scontent.fjsr12-1.fna&_nc_gid=ugFFyntJcPEV9CsPWQrCLg&oh=00_AfTYVoW7UDZsmhLZZUfTOBhixvU84ACjfcdrg0gcMONWWg&oe=6877BACD",
-    rightImage:
-      "https://scontent.fjsr12-1.fna.fbcdn.net/v/t39.30808-6/472869695_122191542680128317_7607595954014579717_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=bU-4rHgmRcMQ7kNvwF_-9qr&_nc_oc=AdmS_m21PqVNUFzKbOItQ2RG7hHQXHHYI6agPl08qsqkHJd6216rMW3CrjtmX0Xkd7o&_nc_zt=23&_nc_ht=scontent.fjsr12-1.fna&_nc_gid=gsa0WJ8EefIanH5_FFexyw&oh=00_AfQPZanGPKOwJfsADamttMZJpGrUJNVq6aN9Sx1ludz9Uw&oe=6877BFEC",
-    title: "Men's Style",
-    subtitle: "AUTUMN EDIT",
-  },
-  {
-    leftImage:
-      "https://scontent.fjsr12-1.fna.fbcdn.net/v/t39.30808-6/471262463_122188723604128317_7144042145808486997_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=LzHU_zhRw9cQ7kNvwFQJ1B8&_nc_oc=AdlvwaswH1z8nlfrp9TAW-3WcNfpZWIAWdxGjG-5cpt_2lC_Ycwhbh9zWC03-_cO-yk&_nc_zt=23&_nc_ht=scontent.fjsr12-1.fna&_nc_gid=nf2o4N7cwQQ7Ie7yGBDiEA&oh=00_AfT5C6pglMV3zm80IK84SR_R_sPto-wfD_ZNDBNJVO5Fxw&oe=6877E718",
-    rightImage:
-      "https://scontent.fjsr12-1.fna.fbcdn.net/v/t39.30808-6/471481842_122188723592128317_649438020445097225_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=5vVUkZazzDcQ7kNvwHN_4nU&_nc_oc=AdnbvUEZyeacvTX1bie1-2DGlJO5UXDArhO_hU5ixedklvu3Y7uKFD0IcYFTclQmnNY&_nc_zt=23&_nc_ht=scontent.fjsr12-1.fna&_nc_gid=Xo2b6RZKwGgcmPIqBDD7sw&oh=00_AfS56LSw2x4CwvzHcRSogJDuZFHpy8M7kkFNpMN1O8LJzg&oe=6877C521",
-    title: "Accessorize",
-    subtitle: "JEWELRY & SHOES",
-  },
-];
+import {
+  ArrowLeft,
+  ArrowRight,
+  Pause,
+  Play,
+  Loader,
+  AlertCircle,
+} from "lucide-react";
 
 export default function HeroSlider() {
-  // Autoplay প্লাগইন সহ Embla Carousel হুক ব্যবহার করা হয়েছে
+  const [slides, setSlides] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: 4000, stopOnInteraction: false }),
   ]);
   const [isPlaying, setIsPlaying] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  // স্লাইডার কন্ট্রোলের জন্য ফাংশন
+  useEffect(() => {
+    const fetchSlides = async () => {
+      try {
+        const response = await fetch(
+          "https://opensheet.elk.sh/1gx6lIxx5ojiql0jEUwJR6HWLEtr6mz7XbrJ3Ta5w2co/hero"
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch hero slider data.");
+        }
+        const data = await response.json();
+
+        // Map the fetched data to the format the slider expects
+        const formattedSlides = data.map((item) => ({
+          leftImage: item.image,
+          rightImage: item.image, // Using the same image for both sides
+          title: item.title,
+          subtitle: item.description,
+        }));
+
+        setSlides(formattedSlides);
+      } catch (err) {
+        setError(err.message);
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSlides();
+  }, []);
+
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
     [emblaApi]
@@ -56,19 +68,15 @@ export default function HeroSlider() {
     [emblaApi]
   );
 
-  // অটো-প্লে চালু বা বন্ধ করার ফাংশন
   const toggleAutoplay = useCallback(() => {
     const autoplay = emblaApi?.plugins()?.autoplay;
     if (!autoplay) return;
-
     const newIsPlaying = !isPlaying;
     if (newIsPlaying) autoplay.play();
     else autoplay.stop();
-
     setIsPlaying(newIsPlaying);
   }, [emblaApi, isPlaying]);
 
-  // বর্তমান স্লাইড ইনডেক্স ট্র্যাক করার জন্য useEffect
   useEffect(() => {
     if (!emblaApi) return;
     const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
@@ -76,9 +84,25 @@ export default function HeroSlider() {
     return () => emblaApi.off("select", onSelect);
   }, [emblaApi]);
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-[550px] bg-gray-100">
+        <Loader className="animate-spin h-12 w-12 text-gray-500" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[550px] bg-red-50 text-red-600">
+        <AlertCircle className="h-12 w-12" />
+        <p className="mt-4 font-semibold">Error: {error}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="relative w-full">
-      {/* "Dancing Script" ফন্ট লোড করার জন্য */}
       <style jsx global>{`
         @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap");
       `}</style>
@@ -94,7 +118,6 @@ export default function HeroSlider() {
               key={index}
             >
               <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-3">
-                {/* বাম পাশের ছবি (ডেস্কটপ) */}
                 <div className="relative h-full w-full col-span-1 hidden md:block">
                   <Image
                     src={slide.leftImage}
@@ -104,10 +127,7 @@ export default function HeroSlider() {
                     priority={index === 0}
                   />
                 </div>
-
-                {/* মাঝখানের টেক্সট */}
                 <div className="relative h-full w-full col-span-1 bg-black flex flex-col items-center justify-center text-white p-8 text-center">
-                  {/* মোবাইলের জন্য ব্যাকগ্রাউন্ড ছবি */}
                   <div className="md:hidden absolute inset-0 z-0">
                     <Image
                       src={slide.leftImage}
@@ -132,8 +152,6 @@ export default function HeroSlider() {
                     </button>
                   </div>
                 </div>
-
-                {/* ডান পাশের ছবি (ডেস্কটপ) */}
                 <div className="relative h-full w-full col-span-1 hidden md:block">
                   <Image
                     src={slide.rightImage}
@@ -148,7 +166,6 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      {/* স্লাইডার কন্ট্রোল */}
       <div className="bg-white w-full flex items-center justify-center space-x-4 py-4 border-t border-gray-200 shadow-sm">
         <button
           onClick={scrollPrev}
