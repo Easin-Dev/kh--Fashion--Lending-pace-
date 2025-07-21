@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { ShoppingCart, Loader, AlertCircle } from "lucide-react";
+import Link from "next/link";
 
 // Mobile-Friendly Product Card Component
 function ProductCard({ product }) {
@@ -66,10 +67,13 @@ function ProductCard({ product }) {
             )}
           </div>
 
-          <button className="w-full mt-4 flex items-center justify-center bg-gray-900 text-white font-bold py-2.5 px-4 rounded-lg hover:bg-gray-700 transition-colors duration-300">
+          <Link
+            href={"https://www.facebook.com/kmfashion700"}
+            className="w-full mt-4 flex items-center justify-center bg-gray-900 text-white font-bold py-2.5 px-4 rounded-lg hover:bg-gray-700 transition-colors duration-300"
+          >
             <ShoppingCart size={18} className="mr-2" />
             Buy Now
-          </button>
+          </Link>
         </div>
       </div>
     </div>
@@ -156,7 +160,7 @@ export default function FeaturedProducts() {
   const tabs = [
     { id: "featured", label: "Featured" },
     { id: "newArrival", label: "New Arrival" },
-    { id: "trending", label: "Trending" }, // "Best Selling" changed to "Trending"
+    { id: "trending", label: "Trending" },
   ];
 
   const currentProducts = products[activeTab] || [];
@@ -196,7 +200,7 @@ export default function FeaturedProducts() {
                 <button
                   key={tab.id}
                   onClick={() => handleTabClick(tab.id)}
-                  className={`text-xl sm:text-2xl font-semibold tracking-wider pb-2 transition-all duration-300 uppercase ${
+                  className={`text-xl sm:text-2xl font-semibold cursor-pointer tracking-wider pb-2 transition-all duration-300 uppercase ${
                     activeTab === tab.id
                       ? "text-gray-900 border-b-2 border-gray-900"
                       : "text-gray-400 hover:text-gray-600"
