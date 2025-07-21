@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+:root {
+  /* 🌞 Light Mode Colors (Normal Mode) */
+  --body-color: #FFFF;
+  --background: #F9E0E3;       /* Soft Pink */
+  --highlight: #E7A6B1;        /* Dusty Rose */
+  --primary-text: #8B3A3A;     /* Deep Maroon */
+  --body-text: #2E2E2E;        /* Dark Gray */
+  --text-bg: #FFFFFF;          /* White background for text areas */
+
+  /* Font defaults */
+  --font-sans: 'Segoe UI', sans-serif;
+  --font-mono: 'Courier New', monospace;
+
+  /* Aliases for easy use */
+  --color-background: var(--background);
+  --color-foreground: var(--primary-text);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 🌚 Dark Mode Colors */
+    --background: #0a0a0a;
+    --highlight: #8B3A3A;       /* Keep Dusty Rose or change */
+    --primary-text: #ededed;
+    --body-text: #bbbbbb;
+    --text-bg: #1a1a1a;
+
+    --color-background: var(--background);
+    --color-foreground: var(--primary-text);
+  }
+}
+
+
+body {
+  background: var(--body-color);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
