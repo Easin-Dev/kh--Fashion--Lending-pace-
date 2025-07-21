@@ -15,12 +15,12 @@ function ProductCard({ product }) {
         {/* ছবির কন্টেইনারটির উচ্চতা এবং স্টাইল পরিবর্তন করা হয়েছে */}
         <div
           className="relative w-full bg-gray-100"
-          style={{ height: "420px" }}
+          style={{ height: "320px" }}
         >
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-contain p-4" // object-contain ব্যবহার করা হয়েছে এবং প্যাডিং যোগ করা হয়েছে
+            className="w-full h-full object-contain" // object-contain ব্যবহার করা হয়েছে এবং প্যাডিং যোগ করা হয়েছে
             onError={(e) => {
               e.target.onerror = null;
               e.target.src =

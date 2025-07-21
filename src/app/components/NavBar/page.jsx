@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from 'next/image';
+import Image from "next/image";
 import { Search, ShoppingBag, ChevronDown, Menu, X } from "lucide-react";
 
 export default function Navbar() {
@@ -29,7 +29,7 @@ export default function Navbar() {
           <div className="flex-shrink-0">
             <a href="#home" className="flex items-center cursor-pointer">
               <Image
-                src="https://i.ibb.co/5h84XN10/kh-fashion-high-resolution-logo-transparent.png"
+                src="https://i.ibb.co/nsGrcB7N/km-fashion-high-resolution-logo-transparent.png"
                 alt="KH Fashion Logo"
                 width={180}
                 height={48}
@@ -67,7 +67,11 @@ export default function Navbar() {
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-gray-600 hover:text-black cursor-pointer"
               >
-                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                {isMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
               </button>
             </div>
           </div>
