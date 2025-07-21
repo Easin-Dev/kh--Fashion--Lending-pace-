@@ -192,7 +192,7 @@ export default function FeaturedProducts() {
                 <button
                   key={tab.id}
                   onClick={() => handleTabClick(tab.id)}
-                  className={`text-xl sm:text-2xl font-semibold tracking-wider pb-2 transition-all duration-300 uppercase ${
+                  className={`text-xl sm:text-2xl font-semibold tracking-wider cursor-pointer pb-2 transition-all duration-300 uppercase ${
                     activeTab === tab.id
                       ? "text-gray-900 border-b-2 border-gray-900"
                       : "text-gray-400 hover:text-gray-600"
