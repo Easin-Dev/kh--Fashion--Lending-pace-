@@ -12,6 +12,7 @@ import {
   Loader,
   AlertCircle,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function HeroSlider() {
   const [slides, setSlides] = useState([]);
@@ -147,9 +148,14 @@ export default function HeroSlider() {
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-wider mt-2">
                       {slide.subtitle}
                     </h1>
-                    <button className="mt-8 bg-white text-black font-bold py-3 px-8 hover:bg-gray-200 transition-colors duration-300 cursor-pointer">
+                    <Link
+                      href="/#featured"
+                      className="mt-12 bg-white text-black font-bold py-2 px-8
+                      hover:bg-gray-200 transition-colors duration-300
+                      cursor-pointer"
+                    >
                       SHOP NOW
-                    </button>
+                    </Link>
                   </div>
                 </div>
                 <div className="relative h-full w-full col-span-1 hidden md:block">
